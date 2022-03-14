@@ -1,6 +1,29 @@
 import "./Rentals.css";
-
+import { useState, useEffect } from "react";
+import axios from "axios";
+// import { AddHouse } from "./Components/AddHouse";
 export const Rentals = () => {
+  const [page, setPage] = useState(1);
+  const [formData, setFormData] = useState({
+    name: "",
+    ownerName: "",
+    address: "",
+    rent: "",
+    image: "",
+    
+    
+  });
+  const [details, setDetails] = useState([]);
+  useEffect(() => {
+    getData();
+  }, [page]);
+
+  const getData = () => {
+    axios.get(`http://localhost:8080/houses?_limit=2&_page=${page}`, formData).then((res) => {
+      setDetails(res.data)
+    });
+     
+}
   return (
     <div className="rentalContainer">
       <div className="sortingButtons">
