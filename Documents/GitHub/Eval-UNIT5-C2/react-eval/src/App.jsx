@@ -7,7 +7,7 @@ function App() {
   const [show, setShow] = useState(true);
   return (
     <div className="App">
-        {show ? < AddHouse /> : <Rentals />}
+      {show ? < Rentals /> : <AddHouse />}
       <button className="toggleForm" onClick={() => {
         // setShow(show ? false : true);
         setShow(!show)
