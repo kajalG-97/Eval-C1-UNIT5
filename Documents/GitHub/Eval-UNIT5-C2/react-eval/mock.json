@@ -1,3 +1,13 @@
 {
-    "houses":[]
+  "houses": [
+    {
+      "name": "jgkj",
+      "ownerName": "fcgvhbj",
+      "address": "fcvgbh",
+      "rent": "222222",
+      "image": "werg",
+      "areaCode": "afff",
+      "id": 1
+    }
+  ]
 }

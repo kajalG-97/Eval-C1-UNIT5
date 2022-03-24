@@ -43,30 +43,30 @@ export const AddHouse = () => {
     <div className="addHouseContainer">
       <form onSubmit={handleSubmit}>
         <label>name</label>
-        <input type="text" className="name" value={formData.name} onChange={handleChange} required />
+        <input type="text" className="name" id = "name" value={formData.name} onChange={handleChange} required />
         <br />
         <label>ownerName</label>
-        <input value={formData.ownerName} onChange={handleChange} type="text" className="ownerName" required />
+        <input value={formData.ownerName} id="ownerName" onChange={handleChange} type="text" className="ownerName" required />
         <br />
         <label>address</label>
-        <input value={formData.address} onChange={handleChange} type="text" className="address" required />
+        <input value={formData.address} id="address" onChange={handleChange} type="text" className="address" required />
         <br />
         <label>areaCode</label>
-        <input value={formData.areaCode} onChange={handleChange} type="text" className="areaCode" required />
+        <input value={formData.areaCode} id="areaCode" onChange={handleChange} type="text" className="areaCode" required />
         <br />
         <label>rent</label>
-        <input value={formData.rent} onChange={handleChange} type="text" className="rent" required />
+        <input value={formData.rent} id="rent" onChange={handleChange} type="text" className="rent" required />
         <br />
         <label>preferredTenant</label>
         <br />
         <label>bachelor</label>
-        <input checked={formData.bachelor} onChange={handleChange} type="checkbox" className="bachelor" />
+        <input checked={formData.bachelor} id="bachelor" onChange={handleChange} type="checkbox" className="bachelor" />
         <br />
         <label>married</label>
-        <input checked={formData.married} onChange={handleChange} type="checkbox" className="married" />
+        <input checked={formData.married} id="married" onChange={handleChange} type="checkbox" className="married" />
         <br />
         <label>image</label>
-        <input value={formData.image} onChange={handleChange} type="text" className="image" required />
+        <input value={formData.image} id="image" onChange={handleChange} type="text" className="image" required />
         <br />
         <input className="submitBtn" type="submit" />
       </form>
