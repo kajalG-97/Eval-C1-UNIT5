@@ -17,6 +17,7 @@ export const AddHouse = () => {
 
   const handleChange = (e) => {
     console.log(e.target.id, e.target.value);
+  
     const { id, value } = e.target;
     setFormData({
       ...formData,

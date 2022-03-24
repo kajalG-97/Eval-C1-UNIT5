@@ -52,7 +52,7 @@ export const Rentals = () => {
           </tr>
         </thead>
         <tbody>
-          {[].map((house, index) => {
+          {details.map((house, index) => {
             return (
               <tr key={house.id} className="houseDetails">
                 <td className="houseId">{house.id}</td>
