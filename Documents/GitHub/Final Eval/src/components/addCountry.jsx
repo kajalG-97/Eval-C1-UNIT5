@@ -5,10 +5,13 @@ import Button from '@mui/material/Button';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { addCountryData } from '../redux/countryAction';
+import { useNavigate } from 'react-router-dom';
 
 export const AddCountry = () => {
 
     const dispatch = useDispatch();
+
+    const navigate = useNavigate();
     const [data, setData] = React.useState({
 
         country: "",
@@ -24,7 +27,7 @@ export const AddCountry = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(addCountryData(data));
-
+        navigate("/");
     }
     const { country } = data;
     return (

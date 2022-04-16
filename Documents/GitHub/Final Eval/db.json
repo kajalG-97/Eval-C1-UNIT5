@@ -2,14 +2,8 @@
   "cities": [
     {
       "city": "Amravati",
-      "population": 456789,
-      "country": "India",
-      "id": 3
-    },
-    {
-      "city": "Amravali",
-      "population": 222,
-      "country": "bangal",
+      "population": "088",
+      "country": "shrilanka",
       "id": 4
     },
     {

@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -10,6 +10,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { getCountryDataList } from '../redux/countryAction';
+import axios from "axios";
 
 
 
@@ -17,7 +18,7 @@ export const EditCity = () => {
     const { id } = useParams();
     console.log('id', id);
 
-   
+   const navigate = useNavigate();
 
     const dispatch = useDispatch();
 
@@ -48,9 +49,9 @@ export const EditCity = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.patch(`http://localhost:8080/cities/${id}`, formData).then(({ data }) => dispatch(addCityData(data)))
+        axios.put(`http://localhost:8080/cities/${id}`, formData).then(({ data }) => dispatch(addCityData(data)))
             .catch((err) => console.log(err.massage));
-
+        navigate("/");
 
 
     }

@@ -14,6 +14,7 @@ import Box from '@mui/material/Box';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { getCountryDataList } from '../redux/countryAction';
+import { cityLoding } from '../redux/CityAction';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -67,19 +68,20 @@ export const Home = () => {
     const getData = () => {
         axios.get(`http://localhost:8080/cities?${country_name}&_sort=population&_order=${sort}`).then(({ data }) => setData(data));
     }
-  
+
     const { id } = useParams();
     console.log('id', id);
 
     const handleDelete = (e) => {
-        dispatch(loding());
-        axios.delete(`http://localhost:8080/cities/${e.target.id}`).then(() => setData());
+        dispatch(cityLoding());
+        axios.delete(`http://localhost:8080/cities/${e.target.id}`).then(() => { setData() });
+        navigate("/");
     }
 
     const handleSort = (e) => {
         if (e.target.id === "country") {
             SetCountry_name(`country=${e.target.value}`)
-          
+
         }
         if (e.target.id === "sortByAsc") {
             setSort("asc");
@@ -94,7 +96,7 @@ export const Home = () => {
 
     return loding ? <img src="https://miro.medium.com/max/1400/1*CsJ05WEGfunYMLGfsT2sXA.gif" /> : (
         <Box>
-            <Box sx={{ display: "flex", justifyContent: "space-around", alignItems: "center" }}>
+            <Box sx={{ m: 2, display: "flex", justifyContent: "space-around", alignItems: "center" }}>
                 <Button id="sortByAsc" onClick={handleSort} variant="outlined">Population Asc</Button>
                 <Button id="sortByDesc" onClick={handleSort} variant="outlined">Population Desc</Button>
 
@@ -127,7 +129,7 @@ export const Home = () => {
                                 <StyledTableCell align="right">{e.city}</StyledTableCell>
                                 <StyledTableCell align="right">{e.population}</StyledTableCell>
                                 <StyledTableCell align="right"><Button onClick={() => navigate(`/cities/${e.id}`)} color="secondary">Edit</Button></StyledTableCell>
-                                <StyledTableCell align="right"><Button onClick={(e) => handleDelete(e)} variant="text">Delete</Button></StyledTableCell>
+                                <StyledTableCell align="right"><Button id={ e.id}onClick={(e) => handleDelete(e)} variant="text">Delete</Button></StyledTableCell>
                             </StyledTableRow>
                         ))}
                     </TableBody>
