@@ -44,14 +44,14 @@ export const Home = () => {
     }, []);
     
     const getData = () => {
-        axios.get("http://localhost:8080/cities").then(({ data }) => setData(data));
+        axios.get(`http://localhost:8080/cities?sort=population&_order=${sort}`).then(({ data }) => setData(data));
     }
 
     const { id } = useParams();
     console.log('id', id);
     
     const handleDelete = (e) => {
-        axios.delete(`http://localhost:8080/cities/${id}`).then(({ data }) => setData(data));
+        axios.delete(`http://localhost:8080/cities/${e.target.id}`).then(() => setData());
     }
     return (
         <TableContainer component={Paper}>
@@ -76,7 +76,7 @@ export const Home = () => {
                             <StyledTableCell align="right">{e.city}</StyledTableCell>
                             <StyledTableCell align="right">{e.population}</StyledTableCell>
                             <StyledTableCell align="right"><Button onClick={()=>navigate(`/cities/${id}`)}color="secondary">Edit</Button></StyledTableCell>
-                            <StyledTableCell align="right"><Button onClick={()=>handleDelete()}variant="text">Delete</Button></StyledTableCell>
+                            <StyledTableCell align="right"><Button onClick={(e)=>handleDelete(e)}variant="text">Delete</Button></StyledTableCell>
                         </StyledTableRow>
                     ))}
                 </TableBody>
