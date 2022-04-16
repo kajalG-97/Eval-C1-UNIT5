@@ -2,7 +2,6 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-
 import { addCityData } from '../redux/CityAction';
 import { useDispatch, useSelector } from 'react-redux';
 import InputLabel from '@mui/material/InputLabel';
@@ -16,6 +15,7 @@ import { getCountryDataList } from '../redux/countryAction';
 export const AddCity = () => {
 
     const dispatch = useDispatch();
+   
 
     const { list, loding } = useSelector((store) => store.country);
     console.log('list', list);
@@ -52,7 +52,8 @@ export const AddCity = () => {
     };
     
     const { city, population, country } = formData;
-    return (
+    
+    return loding ? <img src="https://miro.medium.com/max/1400/1*CsJ05WEGfunYMLGfsT2sXA.gif" />:(
         <Box
             component="form"
             sx={{ width: "220px" ,m:3}}

@@ -10,6 +10,11 @@ import Paper from '@mui/material/Paper';
 import axios from 'axios';
 import Button from '@mui/material/Button';
 import { useNavigate, useParams } from 'react-router-dom';
+import Box from '@mui/material/Box';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { getCountryDataList } from '../redux/countryAction';
+
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -34,55 +39,101 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export const Home = () => {
 
-    const navigate = useNavigate();
-
-    const [data, setData] = React.useState([]);
-    const [sort,setSort] = React.useState("asc");
+    const getCountry = () => {
+        dispatch(getCountryDataList())
+    }
 
     React.useEffect(() => {
-        getData();
+        getCountry();
     }, []);
-    
+
+    const navigate = useNavigate();
+
+    const dispatch = useDispatch();
+
+    const { loding } = useSelector((store) => store.city);
+
+    const { list } = useSelector((store) => store.country);
+    console.log('list', list);
+
+    const [data, setData] = React.useState([]);
+    const [sort, setSort] = React.useState("asc");
+
+    const [country_name, SetCountry_name] = React.useState("");
+    React.useEffect(() => {
+        getData();
+    }, [sort, country_name]);
+
     const getData = () => {
-        axios.get(`http://localhost:8080/cities`).then(({ data }) => setData(data));
+        axios.get(`http://localhost:8080/cities?${country_name}&_sort=population&_order=${sort}`).then(({ data }) => setData(data));
     }
-// sort=population&_order=${sort}
+  
     const { id } = useParams();
     console.log('id', id);
-    
+
     const handleDelete = (e) => {
+        dispatch(loding());
         axios.delete(`http://localhost:8080/cities/${e.target.id}`).then(() => setData());
     }
-    return (
-        <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 700 }} aria-label="customized table">
-                <TableHead>
-                    <TableRow>
-                        <StyledTableCell align="left">ID</StyledTableCell>
-                        <StyledTableCell>Country</StyledTableCell>
-                        <StyledTableCell align="right">City</StyledTableCell>
-                        <StyledTableCell align="right">Population</StyledTableCell>
-                        <StyledTableCell align="right">Edit</StyledTableCell>
-                        <StyledTableCell align="right">Delete</StyledTableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {data.map((e) => (
-                        <StyledTableRow key={e.id}>
-                            <StyledTableCell align="left">{e.id}</StyledTableCell>
-                            <StyledTableCell >
-                                {e.country}
-                            </StyledTableCell>
-                            <StyledTableCell align="right">{e.city}</StyledTableCell>
-                            <StyledTableCell align="right">{e.population}</StyledTableCell>
-                            <StyledTableCell align="right"><Button onClick={()=>navigate(`/cities/${e.id}`)}color="secondary">Edit</Button></StyledTableCell>
-                            <StyledTableCell align="right"><Button onClick={(e)=>handleDelete(e)}variant="text">Delete</Button></StyledTableCell>
-                        </StyledTableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
-        // <h1>hello</h1>
+
+    const handleSort = (e) => {
+        if (e.target.id === "country") {
+            SetCountry_name(`country=${e.target.value}`)
+          
+        }
+        if (e.target.id === "sortByAsc") {
+            setSort("asc");
+        } if (e.target.id === "sortByDesc") {
+            setSort("desc");
+        }
+
+
+    }
+
+
+
+    return loding ? <img src="https://miro.medium.com/max/1400/1*CsJ05WEGfunYMLGfsT2sXA.gif" /> : (
+        <Box>
+            <Box sx={{ display: "flex", justifyContent: "space-around", alignItems: "center" }}>
+                <Button id="sortByAsc" onClick={handleSort} variant="outlined">Population Asc</Button>
+                <Button id="sortByDesc" onClick={handleSort} variant="outlined">Population Desc</Button>
+
+                <select name="country" id="country" onChange={handleSort}>
+                    <option value="">select country</option>
+                    {list ? list.map((e) => {
+                        return <option key={e.id} id="country" value={e.country}>{e.country}</option>
+                    }) : ""}
+                </select>
+            </Box>
+            <TableContainer component={Paper}>
+                <Table sx={{ minWidth: 700 }} aria-label="customized table">
+                    <TableHead>
+                        <TableRow>
+                            <StyledTableCell align="left">ID</StyledTableCell>
+                            <StyledTableCell>Country</StyledTableCell>
+                            <StyledTableCell align="right">City</StyledTableCell>
+                            <StyledTableCell align="right">Population</StyledTableCell>
+                            <StyledTableCell align="right">Edit</StyledTableCell>
+                            <StyledTableCell align="right">Delete</StyledTableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {data.map((e) => (
+                            <StyledTableRow key={e.id}>
+                                <StyledTableCell align="left">{e.id}</StyledTableCell>
+                                <StyledTableCell >
+                                    {e.country}
+                                </StyledTableCell>
+                                <StyledTableCell align="right">{e.city}</StyledTableCell>
+                                <StyledTableCell align="right">{e.population}</StyledTableCell>
+                                <StyledTableCell align="right"><Button onClick={() => navigate(`/cities/${e.id}`)} color="secondary">Edit</Button></StyledTableCell>
+                                <StyledTableCell align="right"><Button onClick={(e) => handleDelete(e)} variant="text">Delete</Button></StyledTableCell>
+                            </StyledTableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        </Box>
     );
-    
+
 }

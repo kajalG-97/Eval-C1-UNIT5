@@ -2,31 +2,31 @@
   "cities": [
     {
       "city": "Amravati",
-      "population": "456789",
+      "population": 456789,
       "country": "India",
       "id": 3
     },
     {
       "city": "Amravali",
-      "population": "222",
+      "population": 222,
       "country": "bangal",
       "id": 4
     },
     {
       "city": "gurugram",
-      "population": "20000",
+      "population": 20000,
       "country": "bangal",
       "id": 5
     },
     {
       "city": "kashmir",
-      "population": "200000",
+      "population": 200000,
       "country": "pakisthan",
       "id": 6
     },
     {
       "city": "Amravali",
-      "population": "30000",
+      "population": 30000,
       "country": "bangal",
       "id": 7
     }

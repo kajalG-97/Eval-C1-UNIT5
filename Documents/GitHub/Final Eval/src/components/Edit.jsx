@@ -17,6 +17,8 @@ export const EditCity = () => {
     const { id } = useParams();
     console.log('id', id);
 
+   
+
     const dispatch = useDispatch();
 
     const { list, loding } = useSelector((store) => store.country);
@@ -57,10 +59,10 @@ export const EditCity = () => {
     };
 
     const { city, population, country } = formData;
-    return (
+    return loding ? <img src="https://miro.medium.com/max/1400/1*CsJ05WEGfunYMLGfsT2sXA.gif" />:(
         <Box
             component="form"
-            sx={{ width: "220px", m: 3 }}
+            sx={{ width: "220px", mt: "40px" }}
         >
             <TextField
                 required value={city}
@@ -73,7 +75,7 @@ export const EditCity = () => {
             <TextField required value={population} id="population" label="population" onChange={handleChange} />
             <br />
             <br />
-            <Box sx={{ width: "120px" }}>
+            <Box sx={{ width: "220px" }}>
                 <FormControl fullWidth>
                     <InputLabel id="demo-simple-select-label">country</InputLabel>
                     <Select
