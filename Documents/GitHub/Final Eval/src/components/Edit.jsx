@@ -31,7 +31,7 @@ export const EditCity = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.put(`http://localhost:8080/cities/${id}`, formData).then(({ data }) => dispatch(addCityData(data)) )
+        axios.patch(`http://localhost:8080/cities/${id}`, formData).then(({ data }) => dispatch(addCityData(data)) )
             .catch((err) => console.log(err.massage));
 
         

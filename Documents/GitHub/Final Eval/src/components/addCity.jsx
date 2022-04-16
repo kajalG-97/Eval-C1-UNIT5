@@ -4,10 +4,29 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
 import { addCityData } from '../redux/CityAction';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import { getCountryDataList } from '../redux/countryAction';
+
+
 
 export const AddCity = () => {
+
     const dispatch = useDispatch();
+
+    const { list, loding } = useSelector((store) => store.country);
+    console.log('list', list);
+
+    const getCountry = () => {
+        dispatch(getCountryDataList())
+    }
+
+    React.useEffect(() => {
+        getCountry();
+    }, []);
 
     const [formData, setFormData] = React.useState({
         city: "",
@@ -17,7 +36,7 @@ export const AddCity = () => {
 
     const handleChange = (e) => {
         const { id, value } = e.target;
-        setFormData({ 
+        setFormData({
             ...formData,
             [id]: value
         })
@@ -26,7 +45,7 @@ export const AddCity = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(addCityData(formData))
-    
+
     }
     const { city, population, country } = formData;
     return (
@@ -41,18 +60,18 @@ export const AddCity = () => {
                 onChange={handleChange}
             />
             <br />
-            <br/>
+            <br />
             <TextField required value={population} id="population" label="population" onChange={handleChange} />
             <br />
-            <br/>
+            <br />
             <TextField
                 required value={country}
                 id="country"
                 label="contry name"
-               onChange={handleChange}
+                onChange={handleChange}
             />
             <br />
-            <br/>
+            <br />
             <Button onClick={handleSubmit} variant="contained" color="success">
                 Add City
             </Button>

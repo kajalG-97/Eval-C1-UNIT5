@@ -44,9 +44,9 @@ export const Home = () => {
     }, []);
     
     const getData = () => {
-        axios.get(`http://localhost:8080/cities?sort=population&_order=${sort}`).then(({ data }) => setData(data));
+        axios.get(`http://localhost:8080/cities`).then(({ data }) => setData(data));
     }
-
+// sort=population&_order=${sort}
     const { id } = useParams();
     console.log('id', id);
     
