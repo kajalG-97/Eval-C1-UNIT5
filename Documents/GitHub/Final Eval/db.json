@@ -2,7 +2,7 @@
   "cities": [
     {
       "city": "Amravati",
-      "population": "088",
+      "population": 088,
       "country": "shrilanka",
       "id": 4
     },
