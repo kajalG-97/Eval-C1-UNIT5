@@ -75,7 +75,7 @@ export const Home = () => {
                             </StyledTableCell>
                             <StyledTableCell align="right">{e.city}</StyledTableCell>
                             <StyledTableCell align="right">{e.population}</StyledTableCell>
-                            <StyledTableCell align="right"><Button onClick={()=>navigate(`/cities/${id}`)}color="secondary">Edit</Button></StyledTableCell>
+                            <StyledTableCell align="right"><Button onClick={()=>navigate(`/cities/${e.id}`)}color="secondary">Edit</Button></StyledTableCell>
                             <StyledTableCell align="right"><Button onClick={(e)=>handleDelete(e)}variant="text">Delete</Button></StyledTableCell>
                         </StyledTableRow>
                     ))}
