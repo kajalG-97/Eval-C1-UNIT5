@@ -30,7 +30,7 @@ export const AddCity = () => {
 
     const [formData, setFormData] = React.useState({
         city: "",
-        population: "",
+        population: 0,
         country: "",
     });
 
@@ -47,11 +47,15 @@ export const AddCity = () => {
         dispatch(addCityData(formData))
 
     }
+    const handleChanged = (event) => {
+        setFormData({ ...formData, country: event.target.value });
+    };
+    
     const { city, population, country } = formData;
     return (
         <Box
             component="form"
-
+            sx={{ width: "220px" ,m:3}}
         >
             <TextField
                 required value={city}
@@ -64,12 +68,22 @@ export const AddCity = () => {
             <TextField required value={population} id="population" label="population" onChange={handleChange} />
             <br />
             <br />
-            <TextField
-                required value={country}
-                id="country"
-                label="contry name"
-                onChange={handleChange}
-            />
+            <Box sx={{ width: "120px" }}>
+            <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">country</InputLabel>
+                <Select
+                    id="country"
+                    value={country}
+                    label="country"
+                    onChange={handleChanged}
+                >
+                    {list && list.map((e,i) => {
+                       return <MenuItem key={i} value={e.country}>{ e.country}</MenuItem>
+                  })}  
+                    
+                </Select>
+            </FormControl>
+            </Box>
             <br />
             <br />
             <Button onClick={handleSubmit} variant="contained" color="success">
