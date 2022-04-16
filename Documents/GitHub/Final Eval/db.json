@@ -1,0 +1,56 @@
+{
+  "cities": [
+    {
+      "city": "Amravati",
+      "population": "456789",
+      "country": "India",
+      "id": 3
+    },
+    {
+      "city": "paravada",
+      "population": "4567",
+      "country": "shrilanka",
+      "id": 4
+    },
+    {
+      "city": "gurugram",
+      "population": "20000",
+      "country": "bangal",
+      "id": 5
+    },
+    {
+      "city": "kashmir",
+      "population": "200000",
+      "country": "pakisthan",
+      "id": 6
+    },
+    {
+      "city": "Amravali",
+      "population": "30000",
+      "country": "bangal",
+      "id": 7
+    }
+  ],
+  "countries": [
+    {
+      "country": "India",
+      "id": 1
+    },
+    {
+      "country": "Bangladesh",
+      "id": 2
+    },
+    {
+      "country": "pakisthan",
+      "id": 3
+    },
+    {
+      "country": "shrilanka",
+      "id": 4
+    },
+    {
+      "country": "bangal",
+      "id": 5
+    }
+  ]
+}
