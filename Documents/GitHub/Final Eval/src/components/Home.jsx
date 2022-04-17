@@ -74,7 +74,7 @@ export const Home = () => {
 
     const handleDelete = (e) => {
         dispatch(cityLoding());
-        axios.delete(`http://localhost:8080/cities/${e.target.id}`).then(() => { setData() });
+        axios.delete(`http://localhost:8080/cities/${e.target.id}`).then(() => getData());
         
     }
 
@@ -129,7 +129,7 @@ export const Home = () => {
                                 <StyledTableCell align="right">{e.city}</StyledTableCell>
                                 <StyledTableCell align="right">{e.population}</StyledTableCell>
                                 <StyledTableCell align="right"><Button onClick={() => navigate(`/cities/${e.id}`)} color="secondary">Edit</Button></StyledTableCell>
-                                <StyledTableCell align="right"><Button id={ e.id}onClick={(e) => handleDelete(e)} variant="text">Delete</Button></StyledTableCell>
+                                <StyledTableCell align="right"><Button id={ e.id} onClick={(e) => handleDelete(e)} variant="text">Delete</Button></StyledTableCell>
                             </StyledTableRow>
                         ))}
                     </TableBody>
