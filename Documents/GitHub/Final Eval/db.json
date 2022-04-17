@@ -13,16 +13,34 @@
       "id": 5
     },
     {
-      "city": "kashmir",
-      "population": 200000,
-      "country": "pakisthan",
-      "id": 6
-    },
-    {
       "city": "Amravali",
       "population": 30000,
       "country": "bangal",
       "id": 7
+    },
+    {
+      "city": "gajiyabad",
+      "population": "999999",
+      "country": "India",
+      "id": 8
+    },
+    {
+      "city": "pune",
+      "population": "30000",
+      "country": "India",
+      "id": 9
+    },
+    {
+      "city": "mumbai",
+      "population": "38000",
+      "country": "India",
+      "id": 10
+    },
+    {
+      "city": "hariyana",
+      "population": "9000",
+      "country": "shrilanka",
+      "id": 11
     }
   ],
   "countries": [

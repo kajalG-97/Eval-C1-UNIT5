@@ -75,7 +75,7 @@ export const Home = () => {
     const handleDelete = (e) => {
         dispatch(cityLoding());
         axios.delete(`http://localhost:8080/cities/${e.target.id}`).then(() => { setData() });
-        navigate("/");
+        
     }
 
     const handleSort = (e) => {

@@ -7,7 +7,6 @@ export const CITY_LOADING = "CITY_LODING";
 export const CITY_DATA = "CITY_DATA";
 
 
-
 export const addCity = (payload) => ({ type: "ADD_CITY", payload });
 
 export const cityLoding = () => ({ type: "CITY_LODING" });
