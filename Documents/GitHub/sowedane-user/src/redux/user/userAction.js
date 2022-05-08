@@ -23,7 +23,7 @@ export const getUserDetails = (page, sort, filter) => (dispatch) => {
 
 } 
 
-export const getOneUserDetail = (dispatch) => {
+export const getOneUserDetail =(id)=> (dispatch) => {
 
     dispatch(userLoding());
 

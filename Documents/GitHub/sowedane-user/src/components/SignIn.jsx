@@ -38,24 +38,24 @@ export const SignIn = () => {
 
     const loginHandler = (e) => {
         // validation for email and password
-        const emailpattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        const passwordPattern =
-            /^(?=[^A-Z\n]*[A-Z])(?=[^a-z\n]*[a-z])(?=[^0-9\n]*[0-9])(?=[^#?!@$%^&*\n-]*[#?!@$%^&*-]).{8,}$/;
-        if (!emailpattern.test(data.email)) {
-            toast.warn("There must be a valid email address", {
-                position: "top-center",
-            });
-        } else if (!passwordPattern.test(data.password)) {
-            toast.warn(
-                "Password must be in Alphanumeric format and min length of 8",
-                {
-                    position: "top-center",
-                }
-            );
-        } else {
+        // const emailpattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        // const passwordPattern =
+        //     /^(?=[^A-Z\n]*[A-Z])(?=[^a-z\n]*[a-z])(?=[^0-9\n]*[0-9])(?=[^#?!@$%^&*\n-]*[#?!@$%^&*-]).{8,}$/;
+        // if (!emailpattern.test(data.email)) {
+        //     toast.warn("There must be a valid email address", {
+        //         position: "top-center",
+        //     });
+        // } else if (!passwordPattern.test(data.password)) {
+        //     toast.warn(
+        //         "Password must be in Alphanumeric format and min length of 8",
+        //         {
+        //             position: "top-center",
+        //         }
+        //     );
+        // } else {
             e.preventDefault();
             dispatch(loginSuccessData(data, toast, navigate))
-        }
+        // }
     };
 
     return loding ? <img src="https://miro.medium.com/max/1400/1*CsJ05WEGfunYMLGfsT2sXA.gif" /> : error ? <img src="https://cdn.dribbble.com/users/2469324/screenshots/6538803/comp_3.gif" alt="Oops something went wrong" /> : (

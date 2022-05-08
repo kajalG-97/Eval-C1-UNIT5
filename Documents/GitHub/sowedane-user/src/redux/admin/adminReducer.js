@@ -1,7 +1,7 @@
 import { LOGIN_ERROR, LOGIN_LODING, LOGIN_SUCCESS, LOGOUT } from "./adminAction";
 
 const initialState = {
-    isAdminAuthenticated: false,
+    isAuthenticated: false,
     token: "",
     admin: {},
     loding: false,

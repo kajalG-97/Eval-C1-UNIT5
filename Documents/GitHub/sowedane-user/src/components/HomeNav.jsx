@@ -44,12 +44,12 @@ export const HomeNav = () => {
 
     const { isAuthenticated } = useSelector((store) => store.auth);
     const { user } = useSelector((store) => store.auth);
-    
-    
 
-    const { isAdminAuthenticated } = useSelector((store) => store.auth);
+    // if(user.admin && user.admin)
 
-    return !isAuthenticated || isAdminAuthenticated? (
+    // const { isAdminAuthenticated } = useSelector((store) => store.admin);
+
+    return !isAuthenticated ? (
 
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
@@ -59,7 +59,7 @@ export const HomeNav = () => {
                         SOWEDANE
                     </Typography>
                     <Link to={"/SignIn"}>
-                        <Button  sx={{ m: 1, color: "#f2f2ff", textDecoration: "none" }} color="inherit"> Login</Button>
+                        <Button sx={{ m: 1, color: "#f2f2ff", textDecoration: "none" }} color="inherit"> Login</Button>
                     </Link>
 
                 </Toolbar>
@@ -74,10 +74,11 @@ export const HomeNav = () => {
                         <Typography variant="h6" component="div" sx={{ mr: 2, flexGrow: 1, display: "flex", justifyContent: "space-between" }}>
                             SOWEDANE
                         </Typography>
-                      
-                            <Link to={"/userpage"}><Button sx={{ m: 1, color: "#f2f2ff", textDecoration: "none" }} color="inherit">User</Button></Link>
-                            <Link to={"/"}><Button sx={{ m: 1, color: "#f2f2ff", textDecoration: "none" }} color="inherit">Hi!{user.admin.firstName} </Button></Link>
-                            <Link underline="none" to={"/"}><Button onClick={() => dispatch(logoutUser())} sx={{ m: 1, color: "#f2f2ff" }} color="inherit">Logout</Button></Link>
+
+                        <Link to={"/userpage"}><Button sx={{ m: 1, color: "#f2f2ff", textDecoration: "none" }} color="inherit">User</Button></Link>
+                        <Button onClick={(e) => navigate(`/editpage/${e._id}`)}
+                            sx={{ m: 1, color: "#f2f2ff", textDecoration: "none" }} color="inherit" id>Hi!  {user.user.firstName} </Button>
+                        <Link underline="none" to={"/"}><Button onClick={() => dispatch(logoutUser())} sx={{ m: 1, color: "#f2f2ff" }} color="inherit">Logout</Button></Link>
 
                     </Toolbar>
                 </AppBar>

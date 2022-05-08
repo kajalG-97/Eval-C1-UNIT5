@@ -8,7 +8,8 @@ import { Home } from './components/Home'
 import { SignUp } from './components/SignUP'
 import { AdminSignIn } from "./components/AdminLogin"
 import { UserInfo } from "./components/UserInfo"
-import {EditInfo} from "./components/EditInfo"
+import { EditInfo } from "./components/EditInfo"
+
 
 function App() {
 
@@ -23,7 +24,8 @@ function App() {
         <Route path="/adminSignIn" element={<AdminSignIn />} />
         <Route path="/mainHome" element={<MainHome />} />
         <Route path="/userpage" element={<UserInfo />} />
-        <Route path="/editpage" element={<EditInfo />} />
+        <Route path="/editpage/:id" element={<EditInfo />} />
+        {/* <Route path="/profile" element={<Profile/>}/> */}
 
       </Routes>
     </div>

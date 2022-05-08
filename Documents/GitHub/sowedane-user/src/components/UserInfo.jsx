@@ -28,6 +28,9 @@ export const UserInfo = () => {
 
     const { isAuthenticated } = useSelector((store) => store.auth);
 
+    // const { isAdminAuthenticated } = useSelector((store) => store.admin);
+
+
     const { users,loding,error } = useSelector((store) => store.user);
     console.log('users', users);
 
