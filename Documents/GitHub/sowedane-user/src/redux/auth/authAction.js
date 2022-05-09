@@ -1,4 +1,5 @@
 import axios from "axios";
+import { userStatus } from "../status/statusAction";
 
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 
@@ -21,7 +22,7 @@ export const loginSuccessData = (data,toast ,navigate ) => (dispatch) => {
     dispatch(loginLoding());
     axios.post("https://user-information-project.herokuapp.com/login", data).then(({ data }) => {
         dispatch(loginSuccess(data));
-        
+        dispatch(userStatus());
         // dispatch(getSchoolData(data.admin._id));
         console.log('data', data);
 

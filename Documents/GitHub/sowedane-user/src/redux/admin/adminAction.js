@@ -1,40 +1,45 @@
 import axios from "axios";
+import { adminStatus } from "../status/statusAction";
 
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const aLOGIN_SUCCESS = 'aLOGIN_SUCCESS';
 
-export const LOGIN_ERROR = 'LOGIN_ERROR';
+export const aLOGIN_ERROR = 'aLOGIN_ERROR';
 
-export const LOGIN_LODING = 'LOGIN_LODING';
+export const aLOGIN_LODING = 'aLOGIN_LODING';
 
 export const LOGOUT = 'LOGOUT';
 
-export const loginLoding = () => ({ type: LOGIN_LODING });
+export const aloginLoding = () => ({ type: aLOGIN_LODING });
 
-export const loginError = () => ({ type: LOGIN_ERROR });
+export const aloginError = () => ({ type: aLOGIN_ERROR });
 
-export const loginSuccess = (payload) => ({ type: LOGIN_SUCCESS, payload });
+export const aloginSuccess = (payload) => ({ type: aLOGIN_SUCCESS, payload });
 
-export const logoutUser = () => ({ type: LOGOUT})
+export const logoutUser = () => ({ type: LOGOUT })
 
-export const adminloginSuccessData = (data,toast ,navigate ) => (dispatch) => {
+export const adminloginSuccessData = (data, toast, navigate) => (dispatch) => {
+    dispatch(aloginLoding());
+    
+   
 
-    dispatch(loginLoding());
-    axios.post("https://user-information-project.herokuapp.com/alogin", data).then(({ data }) => {
-        dispatch(loginSuccess(data));
-        
-        // dispatch(getSchoolData(data.admin._id));
-        console.log('data', data);
+        axios.post("https://user-information-project.herokuapp.com/alogin", data).then(({ data }) => {
+            dispatch(aloginSuccess(data));
 
-        toast.success("Logged in Successfully", {
-            position: "top-center",
+            dispatch(adminStatus());
+
+            console.log('data', data);
+
+            toast.success("Logged in Successfully", {
+                position: "top-center",
+            });
+            setTimeout(() => { navigate("/mainHome"); }, 3000)
+        }).catch((err) => {
+            console.log('err', err.massage);
+            dispatch(aloginError())
+            toast.error("Please check your email or password", {
+                position: "top-center",
+            });
         });
-        setTimeout(() => { navigate("/mainHome"); }, 3000)
-    }).catch((err) => {
-        console.log('err', err.massage);
-        dispatch(loginError())
-        toast.error("Please check your email or password", {
-            position: "top-center",
-        });
-    });
+    }
 
-}
+

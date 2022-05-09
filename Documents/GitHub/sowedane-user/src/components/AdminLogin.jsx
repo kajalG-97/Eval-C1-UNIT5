@@ -34,7 +34,7 @@ export const AdminSignIn = () => {
     const dispatch = useDispatch();
 
 
-    const { loding, error } = useSelector((store) => store.auth);
+    const { loding, error } = useSelector((store) => store.admin);
 
 
     const [data, setData] = useState({

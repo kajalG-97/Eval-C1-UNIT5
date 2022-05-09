@@ -37,7 +37,7 @@ export const updateUserData = (data, id, toast, navigate) => (dispatch) => {
 
     dispatch(userLoding());
 
-    axios.patch(`https://user-information-project.herokuapp.com/${id}`, data).then(({ data }) => {
+    axios.patch(`https://user-information-project.herokuapp.com/users/${id}`, data).then(({ data }) => {
         dispatch(userDetails(data))
         toast.success("User Details Updated!", {
             position: "top-center",

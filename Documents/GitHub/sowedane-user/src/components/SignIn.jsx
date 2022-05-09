@@ -36,7 +36,7 @@ export const SignIn = () => {
         setData({ ...data, [id]: value });
     };
 
-    const loginHandler = (e) => {
+    const loginHandler = () => {
         // validation for email and password
         // const emailpattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         // const passwordPattern =
@@ -53,7 +53,7 @@ export const SignIn = () => {
         //         }
         //     );
         // } else {
-            e.preventDefault();
+            // e.preventDefault();
             dispatch(loginSuccessData(data, toast, navigate))
         // }
     };
@@ -68,7 +68,7 @@ export const SignIn = () => {
                     "& > :not(style)": {
                         m: 1,
                         width: 450,
-                        height: 500,
+                        height: 450,
                     },
                     justifyContent: "center",
                     marginTop: "20px",
@@ -134,23 +134,15 @@ export const SignIn = () => {
                     >
                         or
                     </Typography>
-                    <Button
-                        variant="contained"
-                        sx={{
-                            backgroundColor: "#3b5998",
-                            color: "white",
-                            marginBottom: "20px",
-                        }}
-                        startIcon={<FacebookIcon />}
-                    >
-                        Continue With FaceBook
-                    </Button>
+                   
 
                     <Button
                         variant="contained"
                         sx={{ backgroundColor: "#4285f4", color: "white " }}
                         startIcon={<GoogleIcon />}
-
+                        onClick={() => {
+                            window.location.href = "https://user-information-project.herokuapp.com/auth/google"
+                        }}
                     >
                         Continue With Google
                     </Button>

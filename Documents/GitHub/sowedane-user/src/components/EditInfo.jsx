@@ -17,7 +17,7 @@ import Button from "@mui/material/Button";
 import GoogleIcon from "@mui/icons-material/Google";
 
 import FacebookIcon from "@mui/icons-material/Facebook";
-
+import axios from "axios";
 import { useState ,useEffect} from "react";
 
 import { ToastContainer, toast } from "react-toastify";
@@ -44,7 +44,7 @@ import Select from "@mui/material/Select";
 
 import { registerSuccessData } from "../redux/register/registerAction";
 
-import { getOneUserDetail } from '../redux/user/userAction'
+import { getOneUserDetail,userError } from '../redux/user/userAction'
 
 import { useParams } from "react-router-dom";
 
@@ -62,26 +62,31 @@ export const EditInfo = () => {
 
     const dispatch = useDispatch();
 
-    const { id } = useParams();
-    console.log('id', id);
+    // const { id } = useParams();
+    // console.log('id', id);
+
+    const { user } = useSelector((store) => store.auth);
+    console.log('user', user.user._id);
 
     useEffect(() => {
         getData();
     }, []);
 
 
-    const { users } = useSelector(() => store.user);
+    const { users } = useSelector((store) => store.user);
     console.log('users', users);
 
+    // const data = users;
     const [data, setData] = useState({});
-
-    // console.log('data', data);
+  
+    console.log('data', data);
 
 
     const getData = () => {
 
-       
-        dispatch(getOneUserDetail(id));
+        axios.get(`https://user-information-project.herokuapp.com/users/${user.user._id}`).then(({ data }) => setData(data))
+            .catch((err) => dispatch(userError()));
+        dispatch(getOneUserDetail(user.user._id));
 
     }
 
@@ -117,12 +122,14 @@ export const EditInfo = () => {
         setData({ ...data, city: e.target.value });
     }
 
-    const registerHandler = () => {
+    const registerHandler = (e) => {
 
+
+        e.preventDefault();
        
-        dispatch(updateUserData(data,id, toast, navigate));
+        dispatch(updateUserData(data,user.user._id, toast, navigate));
 
-        console.log('data', data);
+        console.log('datsda', data);
 
         
     };
@@ -174,7 +181,14 @@ export const EditInfo = () => {
         },
     ];
 
-
+    const { firstName,
+        lastName,
+        email,
+    
+        date_of_birth,
+        gender,
+        mobile,
+        city } = data;
 
     // return loding ? <img src="https://miro.medium.com/max/1400/1*CsJ05WEGfunYMLGfsT2sXA.gif" /> : error ? <img src="https://cdn.dribbble.com/users/2469324/screenshots/6538803/comp_3.gif" alt="Oops something went wrong" /> : (
     return (
@@ -210,15 +224,17 @@ export const EditInfo = () => {
                     <Box sx={{ display: "flex", gap: "10px" }}>
                         <TextField
                             id="firstName"
-                            label="First Name"
+                            // label="First Name"
                             variant="outlined"
+                            value = {firstName}
                             sx={{ marginBottom: "25px" }}
                             onChange={getformData}
                         />
                         <TextField
                             id="lastName"
-                            label="Last Name"
+                            // label="Last Name"
                             variant="outlined"
+                            value={lastName}
                             sx={{ marginBottom: "25px" }}
                             onChange={getformData}
                         />
@@ -226,7 +242,8 @@ export const EditInfo = () => {
                     </Box>
                     <TextField
                         id="email"
-                        label="Email"
+                        // label="Email"
+                        value = {email}
                         variant="outlined"
                         sx={{ marginBottom: "25px" }}
                         onChange={getformData}
@@ -257,7 +274,7 @@ export const EditInfo = () => {
                                 <Select
                                     labelId="demo-simple-select-standard-label"
                                     id="demo-simple-select-standard"
-                                    value={filter}
+                                    value={city}
                                     onChange={handleChangeCityOption}
                                     label="City"
                                     sx={{
@@ -294,7 +311,8 @@ export const EditInfo = () => {
 
                         <TextField
                             id="mobile"
-                            label="Mobile Number"
+                            // label="Mobile Number"
+                            value={mobile}
                             variant="outlined"
                             sx={{ marginBottom: "25px" }}
                             onChange={getformData}
@@ -311,21 +329,15 @@ export const EditInfo = () => {
             </LocalizationProvider> */}
                         <TextField
                             id="date_of_birth" type="Date"
-                            label="Date"
+                            // label="Date"
+                            value={date_of_birth}
                             variant="outlined"
                             sx={{ marginBottom: "35px" }}
                             onChange={getformData}
                         />
                     </Box>
 
-                    <TextField
-                        id="password"
-                        label="Password (8 character minimum)"
-                        type="password"
-                        variant="outlined"
-                        sx={{ marginBottom: "10px" }}
-                        onChange={getformData}
-                    />
+                  
 
                     <Button
                         variant="contained"

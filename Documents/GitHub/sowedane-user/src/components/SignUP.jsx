@@ -98,7 +98,7 @@ export const SignUp = () => {
     setData({ ...data, city: e.target.value });
   }
 
-  const registerHandler = () => {
+  const registerHandler = (e) => {
 
     // validation for email ,name and password
     // const namepattern = /[a-zA-Z]/;
@@ -133,6 +133,7 @@ export const SignUp = () => {
     //   );
 
     // } else {
+    e.preventDefault();
       dispatch(registerSuccessData(data, toast, navigate));
 
       console.log('data', data);
@@ -326,7 +327,7 @@ export const SignUp = () => {
               id="date_of_birth" type="Date"
               label="Date"
               variant="outlined"
-              sx={{ marginBottom: "35px" }}
+              sx={{ marginBottom: "25px" }}
               onChange={getformData}
             />
           </Box>
@@ -374,7 +375,9 @@ export const SignUp = () => {
             variant="contained"
             sx={{ backgroundColor: "#4285f4", color: "white " }}
             startIcon={<GoogleIcon />}
-
+            onClick={() => {
+              window.location.href = "https://user-information-project.herokuapp.com/auth/google"
+            }}
           >
             Continue With Google
           </Button>
